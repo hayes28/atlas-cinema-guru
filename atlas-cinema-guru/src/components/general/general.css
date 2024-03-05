@@ -1,0 +1,112 @@
+/* Styling for Compenents: Input, SelectInput, Button, SearchBar */
+:root {
+  --primary-bg-color: #ffffff; /* Light mode background */
+  --primary-text-color: #000000; /* Light mode text */
+  --secondary-bg-color: #000000; /* Dark mode background */
+  --secondary-text-color: #ffffff; /* Dark mode text */
+  --primary-accent-color: #BB000E; /* Accent color */
+  --primary-accent-text-color: #F31D27; /* Accent color */
+  --secondary-accent-color: #E31C25; /* Accent color */
+}
+
+[data-theme="dark"] {
+  --primary-bg-color: #000000; /* Dark mode background */
+  --primary-text-color: #ffffff; /* Dark mode text */
+  --secondary-bg-color: #ffffff; /* Light mode background */
+  --secondary-text-color: #000000; /* Light mode text */
+  /* Override other variables for dark mode */
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.components {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.components .overlap-wrapper {
+    background-color: #ffffff;
+    height: 1671px;
+    width: 1824px;
+}
+
+.components .overlap {
+    background-color: #222222;
+    height: 1671px;
+    left: 4px;
+    position: relative;
+    width: 1820px;
+}
+
+.components .navigation {
+    height: 1243px;
+    left: 106px;
+    position: absolute;
+    top: 86px;
+    width: 1622px;
+}
+
+.components .header {
+    background-color: transparent;
+    height: 128px;
+    left: 0;
+    position: absolute;
+    top: 120px;
+    width: 1632px;
+}
+
+.components .overlap-group {
+    height: 128px;
+    position: relative;
+    width: 1620px;
+}
+
+.components .text-wrapper {
+    color: #ffffff;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 48px;
+    font-weight: 400;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 64px;
+    position: absolute;
+    top: 0;
+}
+
+.components .rectangle {
+    background-color: #161616;
+    height: 62px;
+    left: 0;
+    position: absolute;
+    top: 63px;
+    width: 1620px;
+}
+
+.components .img {
+    height: 41px;
+    left: 1332px;
+    object-fit: cover;
+    position: absolute;
+    top: 74px;
+    width: 43px;
+}
+
+.components .div {
+    color: #ffffff;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 15px;
+    font-weight: 400;
+    left: 33px;
+    letter-spacing: 0;
+    line-height: 16px;
+    position: absolute;
+    top: 84px;
+    width: 96px;
+}

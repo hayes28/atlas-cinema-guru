@@ -1,5 +1,6 @@
 import React from 'react';
-import 'general.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './general.css';
 
 const Input = ({ label, type, className, value, setValue, icon, inputAttributes }) => {
 
@@ -11,7 +12,7 @@ const Input = ({ label, type, className, value, setValue, icon, inputAttributes 
         <div className={`input-wrapper ${className}`}>
             {label && <label>{label}</label>}
             <div className="input-group">
-                {icon && <span className="input-icon">{icon}</span>}
+                {icon && <FontAwesomeIcon icon={icon} />}
                 <input
                     type={type}
                     className={className}

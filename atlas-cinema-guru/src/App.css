@@ -1,10 +1,15 @@
-.App {
-  text-align: center;
+:root {
+  --color-light-red: #E31C25;
+  --color-dark-red: #BB000E;
+  --color-white: #ffffff;
+  --color-black: #000000;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App {
+  text-align: center;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: 'Roboto', sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
