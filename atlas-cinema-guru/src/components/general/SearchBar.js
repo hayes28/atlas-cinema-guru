@@ -1,5 +1,5 @@
 import React from "react";
-import 'general.css';
+import './general.css';
 
 const SearchBar = ({ title, setTitle }) => {
 
@@ -8,7 +8,7 @@ const SearchBar = ({ title, setTitle }) => {
         };
 
         return (
-            <div className="search-bar">
+            <div className="search-bar-wrapper">
                 <input
                     type="search"
                     className="search-bar"
