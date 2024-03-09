@@ -1,6 +1,8 @@
+// Login.js
 import React from "react";
 import './auth.css';
-import Button from '../../components/general/Button';
+import Dashboard from "../dashboard/Dashboard";
+// import Button from '../../components/general/Button';
 
 const Login = ({ username, password, setPassword, setUsername }) => {
     const handleUsernameChange = (e) => {
@@ -12,7 +14,7 @@ const Login = ({ username, password, setPassword, setUsername }) => {
     };
 
     return (
-        <form>
+        <div>
             <input
                 type="text"
                 placeholder="Username"
@@ -25,8 +27,8 @@ const Login = ({ username, password, setPassword, setUsername }) => {
                 value={password}
                 onChange={handlePasswordChange}
             />
-            <Button label="Submit" type="submit" />
-        </form>
+            <Dashboard />
+        </div>
     );
 }
 

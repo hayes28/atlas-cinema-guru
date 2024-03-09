@@ -1,8 +1,9 @@
+// Dashboard.js
 import React from "react";
 import './dashboard.css';
-import Header from "../navigation/Header";
+import Header from "../navigation/Header.js";
 
-const Dashboard = ({ userUsername = '', setIsLoggedIn }) => {
+const Dashboard = ({ userUsername, setIsLoggedIn }) => {
     return (
         <div>
             <Header userUsername={userUsername} setIsLoggedIn={setIsLoggedIn} />

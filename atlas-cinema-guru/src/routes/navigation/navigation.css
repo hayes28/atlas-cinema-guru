@@ -1,0 +1,10 @@
+.logout-arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    transition: all 0.3s;
+}

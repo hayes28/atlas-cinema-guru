@@ -1,7 +1,9 @@
 import React from "react";
 import './navigation.css';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Header = ({ userUsername = '', setIsLoggedIn }) => {
+const Header = ({ userUsername, setIsLoggedIn }) => {
+    console.log(setIsLoggedIn);
     const logout = () => {
         localStorage.removeItem('token');
         setIsLoggedIn(false);

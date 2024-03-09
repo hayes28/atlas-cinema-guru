@@ -1,0 +1,25 @@
+:root {
+    --primary-bg-color: #222;
+    --primary-text-color: #1C1C1C;
+    --form-box-bg: #FFF;
+    --secondary-text-color: #FFF;
+    --selected-tab: #E31C25;
+    --not-selected-tab: #BB000E;
+    --button: #BB000E;
+}
+
+[data-theme="dark"] {
+    --primary-bg-color: #1C1C1C;
+    --primary-text-color: #FFF;
+    --form-box-bg: #1C1C1C;
+    --secondary-text-color: #FFF;
+    --selected-tab: #E31C25;
+    --not-selected-tab: #BB000E;
+    --button: #E31C25;
+}
+
+.active {
+    background-color: var(--primary-accent-color);
+    color: white;
+    /* other styles for the active state */
+}

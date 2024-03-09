@@ -1,9 +1,12 @@
+// Authorization.js
 import React, { useState } from 'react';
 import './auth.css';
 import Button from '../../components/general/Button';
 import Login from './Login';
 import Register from './Register';
 import axios from 'axios';
+
+
 
 const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
     const [username, setUsername] = useState('');
@@ -20,7 +23,7 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const url = _switch ? '/api/auth/login' : '/api/auth/register';
+        const url = _switch ? 'http://localhost:8000/api/auth/login' : 'http://localhost:8000/api/auth/register';
         axios.post(url, { username, password })
         .then((res) => {
             setUserUsername(res.data.username);
@@ -35,8 +38,8 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
         <div>
             <h1>Authentication</h1>
             <form>
-                <Button label="Sign In" onClick={handleSignIn} />
-                <Button label="Sign Up" onClick={handleSignUp} />
+                <Button type="button" label="Sign In" onClick={handleSignIn} className={_switch ? "active" : ""} />
+                <Button type="button" label="Sign Up" onClick={handleSignUp} className={_switch ? "" : "active"} />
                 {_switch ? (
                     <Login
                         username={username}
@@ -52,7 +55,7 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
                         setPassword={setPassword}
                     />
                 )}
-                <Button label="Submit" type="submit" />
+                <Button label="Submit" type='submit' onClick={handleSubmit} />
             </form>
         </div>
     );
