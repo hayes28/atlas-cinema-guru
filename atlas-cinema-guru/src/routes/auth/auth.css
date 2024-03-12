@@ -8,7 +8,7 @@
     --selected-tab: #e31c25;
     --not-selected-tab: #bb000e;
     --button: #bb000e;
-    --font-family: Roboto;
+    --font-family: 'Roboto', sans-serif;
 }
 
 [data-theme="dark"] {
@@ -25,7 +25,6 @@
     background-color: var(--form-box-bg);
     color: var(--primary-text-color);
     border: 1px solid #000000;
-    /* padding: 20px;  add padding to username and password input*/
     width: 400px;
     margin: 50px auto;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -63,12 +62,16 @@
     cursor: pointer;
 }
 
+.button-hover {
+    background-color: var(--selected-tab);
+}
+
 .input-user, .input-password {
     background-color: transparent;
     color: var(--primary-text-color);
     border: none;
     border-bottom: 2px solid var(--not-selected-tab);
-    padding-left: 10px;
+    padding-left: 30px;
     padding-right: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -80,19 +83,42 @@
     line-height: 1rem;
 }
 
+.input-icon-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: var(--not-selected-tab);
+    transform: translateY(-50%);
+}
+
+.login, .register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
 .login p, .register p {
     color: var(--primary-text-color);
     padding: 20px 0px 20px 0px;
     text-align: center;
-    font-family: Roboto;
+    font-family: var(--font-family);
     font-size: 1.1875rem;
     font-style: normal;
     font-weight: bold;
     line-height: 1.2rem;
 }
 
-.input-field:focus {
-    border-bottom: 2px solid var(--selected-tab);
+.input-user:focus, .input-password:focus{
+    font-family: var(--font-family);
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid var(--selected-tab);
 }
 
 .login-button, .signup-button {
@@ -100,12 +126,14 @@
     color: white;
     border: none;
     margin-top: 20px;
-    width: 6.5rem;
-    height: 2.125rem;
+    width: auto; /* Button width is determined by content */
+    padding: 0.625rem 1.25rem; /* Adjust padding for button size */
     font-family: var(--font-family);
     font-size: 0.9375rem;
     font-style: normal;
     font-weight: 400;
     line-height: 1.15rem;
     cursor: pointer;
+    align-self: flex-end;
+    margin-right: 0;
 }

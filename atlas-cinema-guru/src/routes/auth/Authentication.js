@@ -11,13 +11,25 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [_switch, setSwitch] = useState(true);
+    const [hoveredTab, setHoveredTab] = useState(null);
+
+    // We now handle the hover state with a single function
+    const handleMouseEnter = (tabName) => {
+        setHoveredTab(tabName); // 'signIn' or 'signUp'
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredTab(null); // No tab is hovered
+    };
 
     const handleSignIn = () => {
         setSwitch(true);
+        setHoveredTab(null); // No tab is hovered when one is active
     };
 
     const handleSignUp = () => {
         setSwitch(false);
+        setHoveredTab(null); // No tab is hovered when one is active
     };
 
     const handleSubmit = async (onSubmit) => {
@@ -40,9 +52,23 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
 
     return (
         <form className="auth-container" onSubmit={handleSubmit}>
-            <div>
-                <Button type="button" label="Sign In" onClick={handleSignIn} className={_switch ? "button-active" : "button-inactive"} />
-                <Button type="button" label="Sign Up" onClick={handleSignUp} className={_switch ? "button-inactive" : "button-active"} />
+            <div className='button-group'>
+                <Button
+                    type="button"
+                    onMouseEnter={() => handleMouseEnter('signIn')}
+                    onMouseLeave={handleMouseLeave}
+                    label="Sign In"
+                    onClick={handleSignIn}
+                    className={_switch ? "button-active" : hoveredTab === 'signUp' ? "button-hover" : "button-inactive"}
+                />
+                <Button
+                    type="button"
+                    onMouseEnter={() => handleMouseEnter('signUp')}
+                    onMouseLeave={handleMouseLeave}
+                    label="Sign Up"
+                    onClick={handleSignUp}
+                    className={!_switch ? "button-active" : hoveredTab === 'signIn' ? "button-hover" : "button-inactive"}
+                />
             </div>
                 {_switch ? (
                     <Login
