@@ -7,7 +7,6 @@ import Register from './Register';
 import axios from 'axios';
 
 
-
 const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -21,25 +20,30 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
         setSwitch(false);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = async (onSubmit) => {
+        onSubmit.preventDefault();
         const url = _switch ? 'http://localhost:8000/api/auth/login' : 'http://localhost:8000/api/auth/register';
-        axios.post(url, { username, password })
-        .then((res) => {
-            setUserUsername(res.data.username);
-            setIsLoggedIn(true);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+        try {
+            const response = await axios.post(url, { username, password });
+
+            const { accessToken } = response.data;
+
+            if (accessToken) {
+                localStorage.setItem('accessToken', accessToken); // Set the accessToken in local storage
+                setUserUsername(username); // Set the user's username
+                setIsLoggedIn(true);
+            }
+        } catch (error) {
+            console.error('Authentication error:', error);
+        }
     };
 
     return (
-        <div>
-            <h1>Authentication</h1>
-            <form>
-                <Button type="button" label="Sign In" onClick={handleSignIn} className={_switch ? "active" : ""} />
-                <Button type="button" label="Sign Up" onClick={handleSignUp} className={_switch ? "" : "active"} />
+        <form className="auth-container" onSubmit={handleSubmit}>
+            <div>
+                <Button type="button" label="Sign In" onClick={handleSignIn} className={_switch ? "button-active" : "button-inactive"} />
+                <Button type="button" label="Sign Up" onClick={handleSignUp} className={_switch ? "button-inactive" : "button-active"} />
+            </div>
                 {_switch ? (
                     <Login
                         username={username}
@@ -55,9 +59,7 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
                         setPassword={setPassword}
                     />
                 )}
-                <Button label="Submit" type='submit' onClick={handleSubmit} />
             </form>
-        </div>
     );
 }
 

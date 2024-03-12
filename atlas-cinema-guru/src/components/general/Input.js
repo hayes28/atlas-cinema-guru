@@ -9,30 +9,14 @@ const Input = ({ label, type, className, value, setValue, icon, inputAttributes 
     };
 
     return (
-        <div className={`input-wrapper ${className}`}>
-            {label && <label>{label}</label>}
-            <div className="input-group">
-                {icon && <FontAwesomeIcon icon={icon} />}
-                <input
-                    type={type}
-                    className={className}
-                    value={value}
-                    onChange={handleInput}
-                    {...inputAttributes}
-                />
-            </div>
-        </div>
+        <span className={"input-wrapper " + className}>
+            <label>
+                {icon && <FontAwesomeIcon icon={icon} className={icon} />}
+                {label};
+            </label>
+            <input type={type} value={value} onChange={handleInput} {...inputAttributes} />
+        </span>
     );
-};
-
-Input.defaultProps = {
-    label: '',
-    type: 'text',
-    className: '',
-    value: '',
-    setValue: () => { },
-    icon: null,
-    inputAttributes: {},
-};
+}
 
 export default Input;

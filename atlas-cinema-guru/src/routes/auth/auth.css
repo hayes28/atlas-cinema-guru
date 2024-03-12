@@ -1,25 +1,111 @@
+@import '../../App.css';
+
 :root {
     --primary-bg-color: #222;
-    --primary-text-color: #1C1C1C;
-    --form-box-bg: #FFF;
-    --secondary-text-color: #FFF;
-    --selected-tab: #E31C25;
-    --not-selected-tab: #BB000E;
-    --button: #BB000E;
+    --primary-text-color: #1c1c1c;
+    --form-box-bg: #fff;
+    --secondary-text-color: #fff;
+    --selected-tab: #e31c25;
+    --not-selected-tab: #bb000e;
+    --button: #bb000e;
+    --font-family: Roboto;
 }
 
 [data-theme="dark"] {
-    --primary-bg-color: #1C1C1C;
-    --primary-text-color: #FFF;
-    --form-box-bg: #1C1C1C;
-    --secondary-text-color: #FFF;
-    --selected-tab: #E31C25;
-    --not-selected-tab: #BB000E;
-    --button: #E31C25;
+    --primary-bg-color: #1c1c1c;
+    --primary-text-color: #fff;
+    --form-box-bg: #1c1c1c;
+    --secondary-text-color: #fff;
+    --selected-tab: #e31c25;
+    --not-selected-tab: #bb000e;
+    --button: #e31c25;
 }
 
-.active {
-    background-color: var(--primary-accent-color);
+.auth-container {
+    background-color: var(--form-box-bg);
+    color: var(--primary-text-color);
+    border: 1px solid #000000;
+    /* padding: 20px;  add padding to username and password input*/
+    width: 400px;
+    margin: 50px auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 1px;
+    width: 28.125rem;
+    height: 22.5625rem;
+    flex-shrink: 0;
+}
+
+.button-active {
+    background-color: var(--selected-tab);
     color: white;
-    /* other styles for the active state */
+    border: none;
+    padding: 20px 30px;
+    width: 50%;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1rem;
+    cursor: pointer;
+}
+
+.button-inactive {
+    background-color: var(--not-selected-tab);
+    color: white;
+    border: none;
+    padding: 20px 30px;
+    width: 50%;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1rem;
+    cursor: pointer;
+}
+
+.input-user, .input-password {
+    background-color: transparent;
+    color: var(--primary-text-color);
+    border: none;
+    border-bottom: 2px solid var(--not-selected-tab);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 80%;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1rem;
+}
+
+.login p, .register p {
+    color: var(--primary-text-color);
+    padding: 20px 0px 20px 0px;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1.1875rem;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 1.2rem;
+}
+
+.input-field:focus {
+    border-bottom: 2px solid var(--selected-tab);
+}
+
+.login-button, .signup-button {
+    background-color: var(--button);
+    color: white;
+    border: none;
+    margin-top: 20px;
+    width: 6.5rem;
+    height: 2.125rem;
+    font-family: var(--font-family);
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.15rem;
+    cursor: pointer;
 }
