@@ -5,7 +5,7 @@ import Header from "../navigation/Header.js";
 
 const Dashboard = ({ userUsername, setIsLoggedIn }) => {
     return (
-        <div>
+        <div className="dashboard">
             <Header userUsername={userUsername} setIsLoggedIn={setIsLoggedIn} />
             <h1>Dashboard</h1>
         </div>

@@ -24,13 +24,4 @@ const SelectInput = ({ label, options, className, value, setValue, inputAttribut
     );
 };
 
-SelectInput.defaultProps = {
-    label: '',
-    options: [],
-    className: '',
-    value: '',
-    setValue: () => { },
-    inputAttributes: {},
-};
-
 export default SelectInput;

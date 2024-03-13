@@ -51,8 +51,8 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
     };
 
     return (
-        <form className="auth-container" onSubmit={handleSubmit}>
-            <div className='button-group'>
+        <form className="authentication" onSubmit={handleSubmit}>
+            <div className='toggle-auth'>
                 <Button
                     type="button"
                     onMouseEnter={() => handleMouseEnter('signIn')}
