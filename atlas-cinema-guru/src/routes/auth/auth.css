@@ -24,7 +24,7 @@
 .register p {
     font-size: 19px;
     align-self: center;
-    color: var(--color-black);
+    color: var(--color-black) !important;
 }
 
 /* #endregion */

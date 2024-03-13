@@ -32,8 +32,13 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
         setHoveredTab(null); // No tab is hovered when one is active
     };
 
+
     const handleSubmit = async (onSubmit) => {
         onSubmit.preventDefault();
+        if (!username.trim() || !password.trim()) {
+            console.error('Please enter a username and password')
+            return;
+        }
         const url = _switch ? 'http://localhost:8000/api/auth/login' : 'http://localhost:8000/api/auth/register';
         try {
             const response = await axios.post(url, { username, password });
