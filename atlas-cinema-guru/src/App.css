@@ -2,14 +2,15 @@
   --color-light-red: #E31C25;
   --color-dark-red: #BB000E;
   --color-white: #ffffff;
-  --color-black: #000000;
+  --color-light-black: #222;
+  --color-dark-black: #161616;
   --font-family: 'Roboto', sans-serif;
   --color-gray: #808080;
 }
 
 .App {
   text-align: center;
-  background-color: var(--color-black);
+  background-color: var(--color-dark-black);
   color: var(--color-white);
   font-family: var(--font-family);
 }
