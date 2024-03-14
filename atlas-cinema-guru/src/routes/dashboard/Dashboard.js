@@ -4,10 +4,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from '../navigation/Header.js';
 import SideBar from '../navigation/SideBar.js';
 
-// Components to be created later
-// import HomePage from '../your-components/HomePage';
-// import Favorites from '../your-components/Favorites';
-// import WatchLater from '../your-components/WatchLater';
+import HomePage from '../dashboard/HomePage.js';
+import Favorites from '../dashboard/Favorites.js';
+import WatchLater from '../dashboard/WatchLater.js';
 
 const Dashboard = ({ userUsername, setIsLoggedIn }) => {
     return (
@@ -17,9 +16,9 @@ const Dashboard = ({ userUsername, setIsLoggedIn }) => {
                 <SideBar />
                 <Routes>
                     {/* These routes will render the respective components when navigated to */}
-                    <Route path="/home" element={<div>HomePage Component</div>} />
-                    <Route path="/favorites" element={<div>Favorites Component</div>} />
-                    <Route path="/watchlater" element={<div>WatchLater Component</div>} />
+                    <Route path="/home" element={<HomePage />}/>
+                    <Route path="/favorites" element={<Favorites />}/>
+                    <Route path="/watchlater" element={<WatchLater/>}/>
 
                     {/* Catch-all route - redirects any other path to "/home" */}
                     <Route path="*" element={<Navigate to="/home" replace />} />

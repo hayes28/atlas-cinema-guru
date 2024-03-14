@@ -1,29 +1,67 @@
-// src/components/movies/Filter.js
 import React from 'react';
 import './movies.css';
+import SearchBar from '../general/SearchBar';
+import Input from '../general/Input';
+import SelectInput from '../general/SelectInput';
 import Tag from './Tag';
 
-// Include any other imports for SearchBar and SelectInput if you have these components
-import SearchBar from '../SearchBar';
-import SelectInput from '../SelectInput';
+function Filter({
+    minYear, setMinYear, maxYear, setMaxYear, sort,
+    setSort, genres, setGenres, title, setTitle
+}) {
 
-const Filter = ({ minYear, setMinYear, maxYear, setMaxYear, sort, setSort, genres, setGenres, title, setTitle }) => {
-    // Handle additional logic if necessary
+    // Array of genres for Tag mapping
+    const genreOptions = [
+        "action", "drama", "comedy", "biography", "romance",
+        "thriller", "war", "history", "sport", "sci-fi",
+        "documentary", "crime", "fantasy"
+    ];
+
+    // Sorting options for SelectInput
+    const sortOptions = [
+        { value: "latest", label: "Latest" },
+        { value: "oldest", label: "Oldest" },
+        { value: "highestrated", label: "Highest Rated" },
+        { value: "lowestrated", label: "Lowest Rated" }
+    ];
 
     return (
-        <div className="filter">
+        <div className="Filter">
             <SearchBar title={title} setTitle={setTitle} />
-            <input type="number" value={minYear} onChange={e => setMinYear(e.target.value)} placeholder="Min Year" />
-            <input type="number" value={maxYear} onChange={e => setMaxYear(e.target.value)} placeholder="Max Year" />
-            <SelectInput options={[...]} value={sort} setValue={setSort} />
-            <div className="tags-list">
-                {['action', 'drama', 'comedy', 'biography', 'romance', 'thriller', 'war', 'history', 'sport', 'sci-fi', 'documentary', 'crime', 'fantasy'].map(genre => (
-                    <Tag key={genre} genre={genre} filter={true} genres={genres} setGenres={setGenres} />
+            <Input
+                label="Min Year:"
+                type="number"
+                className="year-input"
+                value={minYear}
+                setValue={setMinYear}
+            />
+            <Input
+                label="Max Year:"
+                type="number"
+                className="year-input"
+                value={maxYear}
+                setValue={setMaxYear}
+            />
+            <SelectInput
+                label="Sort By:"
+                options={sortOptions}
+                className="sort-select"
+                value={sort}
+                setValue={setSort}
+            />
+            <div className="genres-tags">
+                {genreOptions.map((genre) => (
+                    <Tag
+                        key={genre}
+                        genre={genre}
+                        filter={true}
+                        genres={genres}
+                        setGenres={setGenres}
+                    />
                 ))}
             </div>
         </div>
     );
-};
+}
 
 export default Filter;
-

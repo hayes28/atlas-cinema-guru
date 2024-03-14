@@ -6,7 +6,6 @@ import './navigation.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder, faStar, faClock } from '@fortawesome/free-solid-svg-icons';
 
-// Functional Component Setup
 export default function SideBar() {
     const [selected, setSelected] = useState('Home');
     const [small, setSmall] = useState(true);
@@ -27,14 +26,30 @@ export default function SideBar() {
 
     // Fetch Activities
     useEffect(() => {
-        axios.get('http://localhost:8000/api/activity')
-            .then(res => {
-                setActivities(res.data);
-                setShowActivities(true); // If you want to show activities after fetching
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        const fetchActivities = async () => {
+            try {
+                const accessToken = localStorage.getItem('accessToken'); // Retrieve the stored token
+                const response = await axios.get('http://localhost:8000/api/activity/', {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                // Map the response data to include only necessary fields if the Activity component expects different props
+                const activityData = response.data.map(activity => ({
+                    userUsername: activity.user.username,
+                    title: activity.title.title, // Adjust if the structure is different
+                    date: new Date(activity.createdAt).toLocaleDateString() // Format date as needed
+                }));
+                setActivities(activityData);
+                setShowActivities(true);
+            } catch (error) {
+                console.error('Failed to fetch activities:', error);
+            }
+        };
+
+        fetchActivities();
     }, []);
 
     useEffect(() => {
@@ -50,7 +65,7 @@ export default function SideBar() {
 
         adjustSidebarTop(); // Call the function on component mount
 
-        // Optional: If your header might change height dynamically (e.g., due to window resizing), consider adding an event listener
+        // If my header might change height dynamically (e.g., due to window resizing), consider adding an event listener
         window.addEventListener('resize', adjustSidebarTop);
 
         // Cleanup function to remove the event listener
@@ -59,39 +74,29 @@ export default function SideBar() {
         };
     }, []);
 
-    // Return components
     return (
         <nav className={`sidebar ${small ? '' : 'open'}`} onMouseEnter={toggleSidebar} onMouseLeave={toggleSidebar}>
             <ul className="navigation-menu">
-                <li
-                    className={`nav-item ${selected === 'home' ? 'selected' : ''}`}
-                    onClick={() => setPage("home")}
-                >
+                <li className={`nav-item ${selected === 'home' ? 'selected' : ''}`} onClick={() => setPage('home')}>
                     <FontAwesomeIcon className="fa-icon" icon={faFolder} />
                     {!small && <span>Home</span>}
                 </li>
-                <li
-                    className={`nav-item ${selected === 'favorites' ? 'selected' : ''}`}
-                    onClick={() => setPage("favorites")}
-                >
+                <li className={`nav-item ${selected === 'favorites' ? 'selected' : ''}`} onClick={() => setPage('favorites')}>
                     <FontAwesomeIcon className="fa-icon" icon={faStar} />
                     {!small && <span>Favorites</span>}
                 </li>
-                <li
-                    className={`nav-item ${selected === 'watchlater' ? 'selected' : ''}`}
-                    onClick={() => setPage("watchlater")}
-                >
+                <li className={`nav-item ${selected === 'watchlater' ? 'selected' : ''}`} onClick={() => setPage('watchlater')}>
                     <FontAwesomeIcon className="fa-icon" icon={faClock} />
                     {!small && <span>Watch Later</span>}
                 </li>
             </ul>
-            {showActivities && (
+            {showActivities && activities.length > 0 && (
                 <ul className="activity-list">
-                    {activities.slice(0, 10).map((activity, index) => (
-                        <Activity key={index} activity={activity} />
+                    {activities.map((activity, index) => (
+                        <Activity key={index} userUsername={activity.userUsername} title={activity.title} date={activity.date} />
                     ))}
                 </ul>
             )}
         </nav>
     );
-};
+}

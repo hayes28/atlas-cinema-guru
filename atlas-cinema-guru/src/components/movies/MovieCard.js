@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './movies.css';
-// Import FontAwesomeIcon and the specific icons you need
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faClock, faClockCheck, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 
 const MovieCard = ({ movie }) => {
     const [isFavorite, setIsFavorite] = useState
@@ -11,48 +11,56 @@ const MovieCard = ({ movie }) => {
     const [isWatchLater, setIsWatchLater] = useState(false);
 
     useEffect(() => {
-        // Note: Replace 'userID' with the actual user ID
-        const userID = 'userID'; // This should come from the user's state or context
+        const checkStatus = async () => {
+            try {
 
-        // Get the user's favorites
-        axios.get(`/api/titles/favorite/${userID}`)
-            .then(response => {
-                setIsFavorite(response.data.includes(movie.imdbId));
-            })
-            .catch(error => console.error('Error fetching favorites:', error));
+                const responseFavorite = await axios.get(`http://localhost:8000/api/titles/favorite/${movie.imdbID}`);
+                setIsFavorite(responseFavorite.data.isFavorite);
 
-        // Get the user's watch later list
-        axios.get(`/api/titles/watchlater/${userID}`)
-            .then(response => {
-                setIsWatchLater(response.data.includes(movie.imdbId));
-            })
-            .catch(error => console.error('Error fetching watch later list:', error));
-    }, [movie.imdbId]);
 
-    const handleClick = (type) => {
-        // Depending on whether it's a favorite/watch later, post/delete to the server
-        const action = (type === 'favorite' && !isFavorite) || (type === 'watchlater' && !isWatchLater) ? 'post' : 'delete';
-        axiosaction
-            .then(() => {
-                if (type === 'favorite') {
-                    setIsFavorite(!isFavorite);
-                } else {
-                    setIsWatchLater(!isWatchLater);
-                }
-            })
-            .catch(error => console.error(Error updating ${ type }:, error));
+                const responseWatchLater = await axios.get(`http://localhost:8000/api/titles/watchlater/${movie.imdbID}`)
+                setIsWatchLater(responseWatchLater.data.isWatchLater);
+            } catch (error) {
+                console.error('Error fetching movie status:', error);
+            }
+        };
+        checkStatus();
+    }, [movie.imdbID]);
+
+    const handleClick = async (type) => {
+        const endpoint = `http://localhost:8000/api/titles/${type}/${movie.imdbID}`;
+        try {
+            if ((type === 'favorite' && !isFavorite) || (type === 'watchlater' && !isWatchLater)) {
+                await axios.post(endpoint);
+            } else {
+                await axios.delete(endpoint);
+            }
+
+            if (type === 'favorite') {
+                setIsFavorite(!isFavorite);
+            } else if (type === 'watchlater') {
+                setIsWatchLater(!isWatchLater);
+            }
+        } catch (error) {
+            console.error(`Error updating ${type} status:`, error);
+        }
     };
 
     return (
         <li className="movie-card">
-            {/* Icons for favoriting/watch later functionality /}
-{/ <FontAwesomeIcon icon="..." onClick={() => handleClick('favorite')} className={icon ${isFavorite ? 'active' : ''}} /> /}
-{/ <FontAwesomeIcon icon="..." onClick={() => handleClick('watchlater')} className={icon ${isWatchLater ? 'active' : ''}} /> */}
+            <div className="movie-actions">
+                <FontAwesomeIcon icon={isFavorite ? faStar : faStarHalfAlt} onClick={() => handleClick('favorite')} />
+                <FontAwesomeIcon icon={isWatchLater ? faClockCheck : faClock} onClick={() => handleClick('watchlater')} />
+            </div>
             <h3>{movie.title}</h3>
             <p>{movie.synopsis}</p>
-            <div>{movie.genres.map(genre => <span key={genre}>{genre}</span>)}</div>
+            <div className="movie-genres">
+                {movie.genres.map((genre, index) => (
+                    <span key={index}>{genre}</span>
+                ))}
+            </div>
         </li>
     );
-};
+}
 
 export default MovieCard;
